@@ -1,13 +1,22 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link>|
-      <router-link to="/about">About</router-link>
+      <a href="/rippleTMT.github.io" v-if="isProduction">Ripple button</a>
     </div>
     <router-view />
   </div>
 </template>
 
+<script lang="ts">
+import Vue from "vue";
+export default Vue.extend({
+  data() {
+    return {
+      isProduction: process.env.NODE_ENV === "production"
+    };
+  }
+});
+</script>
 <style lang="scss">
 body {
   font-family: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
