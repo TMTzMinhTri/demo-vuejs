@@ -3,6 +3,7 @@
     <section class="todoapp">
       <Header title="todos"></Header>
       <ListTodos />
+      <Control />
     </section>
     <footer />
   </div>
@@ -18,6 +19,7 @@ import InputVue from "@/components/InputTodo/index.vue";
 import Header from "@/components/header/index.vue";
 import Footer from "@/components/footer/index.vue";
 import ListTodos from "@/components/listTodos/index.vue";
+import Control from "@/components/listTodos/Control/index.vue";
 
 export default {
   name: "Home",
@@ -26,7 +28,8 @@ export default {
     Spin,
     Header,
     Footer,
-    ListTodos
+    ListTodos,
+    Control
   },
   data: () => ({}),
   created() {

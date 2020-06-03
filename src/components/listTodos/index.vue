@@ -7,7 +7,12 @@
       :class="{ completed: todo.isComplete, editing: todo == editedTodo }"
     >
       <div class="view">
-        <input class="toggle" type="checkbox" />
+        <input
+          class="toggle"
+          type="checkbox"
+          :value="todo.isComplete"
+          @input="updateStatusTodo({...todo, isComplete: !todo.isComplete})"
+        />
         <label @dblclick="editTodo(todo)">{{ todo.content }}</label>
         <button class="destroy" @click="removeTodo(todo)"></button>
       </div>
@@ -29,7 +34,6 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { debounce } from "lodash";
-import Store from "@/store";
 import { Ilist_todos } from "@/database";
 
 @Component({
@@ -47,7 +51,9 @@ export default class InputVue extends Vue {
   public debouncedInput = debounce(value => {
     this.$store.commit("changeNewTodo", value);
   }, 500);
-
+  mounted() {
+    console.log(this.listTodos);
+  }
   doneEdit(todo: Ilist_todos) {
     if (!this.editedTodo) return;
     this.editedTodo = null;
@@ -55,6 +61,9 @@ export default class InputVue extends Vue {
     if (!todo.content) {
       this.removeTodo(todo);
     }
+  }
+  updateStatusTodo(todo: Ilist_todos) {
+    this.$store.dispatch("updateTodo", todo);
   }
   inputFocus(event: Event, todo?: string) {
     if (event.type === "input") {
@@ -65,7 +74,7 @@ export default class InputVue extends Vue {
     }
   }
   removeTodo(todo: Ilist_todos) {
-    Store.dispatch("removeTodo", todo);
+    this.$store.dispatch("removeTodo", todo);
   }
   editTodo(todo: Ilist_todos) {
     this.editedTodo = todo;

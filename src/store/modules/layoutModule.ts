@@ -27,7 +27,7 @@ export const layOutModule: StoreOptions<ILayOutModule> = {
     },
     updateTodo(state, payload: Ilist_todos) {
       state.listTodo.splice(
-        state.listTodo.findIndex((payload) => payload.id),
+        state.listTodo.findIndex((item) => item.id === payload.id),
         1,
         payload
       );
@@ -68,9 +68,21 @@ export const layOutModule: StoreOptions<ILayOutModule> = {
         commit("updateTodo", {
           ...todo,
           content: state.newTodo.trim(),
+          isComplete: todo.isComplete,
         });
         resolve();
       });
+    },
+    filterTodo({ commit, state }, type: string) {
+      switch (type) {
+        case (type = "active"):
+          const newState = state.listTodo.filter((item) => !item.isComplete);
+          commit("getListTodos", newState);
+          break;
+
+        default:
+          break;
+      }
     },
   },
   getters: {
