@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex, { ModuleTree } from "vuex";
-import { layOutModule, ILayOutModule} from "./modules";
+import { layOutModule, ILayOutModule } from "./modules";
 
 Vue.use(Vuex);
 

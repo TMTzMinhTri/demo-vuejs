@@ -9,7 +9,18 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { getCurentUser } from "./Api";
 export default Vue.extend({
+  mounted() {
+    console.log("mount");
+    getCurentUser().then((data: any) => {
+      if (data.code === "OK") {
+        this.$store.commit("auth", true);
+      } else {
+        this.$store.commit("auth", false);
+      }
+    });
+  },
   data() {
     return {
       isProduction: process.env.NODE_ENV === "production"

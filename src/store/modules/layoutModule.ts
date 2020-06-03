@@ -6,6 +6,7 @@ export interface ILayOutModule {
   listTodo: Ilist_todos[];
   loading: boolean;
   newTodo: string;
+  auth: boolean;
 }
 
 export const layOutModule: StoreOptions<ILayOutModule> = {
@@ -13,6 +14,7 @@ export const layOutModule: StoreOptions<ILayOutModule> = {
     listTodo: [],
     loading: true,
     newTodo: "",
+    auth: false,
   }),
   mutations: {
     getListTodos(state, listdata) {
@@ -34,6 +36,9 @@ export const layOutModule: StoreOptions<ILayOutModule> = {
     },
     changeNewTodo(state, newTodo: string) {
       state.newTodo = newTodo;
+    },
+    auth(state, status) {
+      state.auth = status;
     },
   },
   actions: {
