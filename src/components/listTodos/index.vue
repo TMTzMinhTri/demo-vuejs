@@ -51,9 +51,6 @@ export default class InputVue extends Vue {
   public debouncedInput = debounce(value => {
     this.$store.commit("changeNewTodo", value);
   }, 500);
-  mounted() {
-    console.log(this.listTodos);
-  }
   doneEdit(todo: Ilist_todos) {
     if (!this.editedTodo) return;
     this.editedTodo = null;
